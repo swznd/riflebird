@@ -4,12 +4,22 @@ namespace Riflebird\API;
 class Config
 {
   
-  public static function get($files, $key = '') {
+  public static function get($file, $key = '') {
     
-    $sites = Yaml::parse($files);
+    $riflebird = \Riflebird\Riflebird::getInstance();
     
-    if (isset($key)) {
-      if (isset($sites[$key])) {
+    if ( ! \Riflebird\API\Filesystem::isYaml($file)) {
+      $file .= '.yaml';
+    }
+    
+    if ( ! \Riflebird\API\Filesystem::isHasDir($file)) {
+      $file = $riflebird->getVars('config.path') . '/' . $file;
+    }
+    
+    $sites = Yaml::parse($file);
+    
+    if ( ! empty($key)) {
+      if ( ! empty($sites[$key])) {
         return $sites[$key];
       }
       
@@ -18,4 +28,5 @@ class Config
     
     return $sites;
   }
+  
 }
