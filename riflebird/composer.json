@@ -1,5 +1,6 @@
 {
   "require": {
-    "mustangostang/spyc": "*"
+    "mustangostang/spyc": "*",
+    "torophp/torophp": "dev-master"
   }
 }
