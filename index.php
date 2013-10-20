@@ -1,8 +1,11 @@
 <?php
 
-define('BASEPATH', __DIR__);
-define('SYSPATH', __DIR__.'/riflebird');
+require_once 'Riflebird/Riflebird.php';
 
-require_once SYSPATH.'/boot.php';
-require_once SYSPATH.'/run.php';
+\Riflebird\Riflebird::registerAutoload();
 
+$riflebird = new \Riflebird\Riflebird(array(
+  'config.path' => __DIR__ . '/Riflebird/config'
+));
+
+$riflebird->run();
