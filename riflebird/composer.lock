@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "160b0c2925d0a75022aa0a4ffd145125",
+    "hash": "42475f3123c1f8e4b044a9c0270171ec",
     "packages": [
         {
             "name": "mustangostang/spyc",
@@ -51,6 +51,54 @@
                 "yml"
             ],
             "time": "2013-02-21 10:52:01"
+        },
+        {
+            "name": "pyrocms/lex",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/pyrocms/lex.git",
+                "reference": "f30bcdf783f8f0b6c91d31b5947f49328fe65cf2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/pyrocms/lex/zipball/f30bcdf783f8f0b6c91d31b5947f49328fe65cf2",
+                "reference": "f30bcdf783f8f0b6c91d31b5947f49328fe65cf2",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "replace": {
+                "fuel/lex": "*"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "3.7.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Lex": "lib/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Dan Horrigan",
+                    "email": "dan@dhorrigan.com",
+                    "homepage": "http://dhorrigan.com",
+                    "role": "Lead Developer"
+                }
+            ],
+            "description": "A lightweight template parser.",
+            "keywords": [
+                "parser",
+                "template"
+            ],
+            "time": "2013-01-11 22:15:49"
         },
         {
             "name": "torophp/torophp",
@@ -136,7 +184,8 @@
     ],
     "minimum-stability": "stable",
     "stability-flags": {
-        "torophp/torophp": 20
+        "torophp/torophp": 20,
+        "pyrocms/lex": 20
     },
     "platform": [
 
