@@ -1,7 +1,7 @@
 name: Riflebrid
-theme: default
+theme: sederhana
 timezone: Asia/Jakarta
 
 directory:
   content: content
-  theme: theme
+  theme: themes
