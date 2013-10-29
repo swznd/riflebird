@@ -1,0 +1,13 @@
+"/":
+  function: 
+    \Riflebird\Modules\Blog\Blog
+    lists
+    params:
+      per_page: 10
+  template: home.html
+
+"/category/([a-zA-Z]+)":
+  function: 
+    \Riflebird\Module\Blog\Blog
+    category
+  template: category.html
