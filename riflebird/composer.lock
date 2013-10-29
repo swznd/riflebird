@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "42475f3123c1f8e4b044a9c0270171ec",
+    "hash": "a00d09810bcadff4a98eb16e7885f23e",
     "packages": [
         {
             "name": "mustangostang/spyc",
@@ -99,81 +99,6 @@
                 "template"
             ],
             "time": "2013-01-11 22:15:49"
-        },
-        {
-            "name": "torophp/torophp",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/anandkunal/ToroPHP.git",
-                "reference": "470ae04ab677c56162740a10b729313d8ff42379"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/anandkunal/ToroPHP/zipball/470ae04ab677c56162740a10b729313d8ff42379",
-                "reference": "470ae04ab677c56162740a10b729313d8ff42379",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.0"
-            },
-            "type": "library",
-            "autoload": {
-                "files": [
-                    "src/Toro.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Martin Bean",
-                    "email": "martin@martinbean.co.uk",
-                    "homepage": "http://www.martinbean.co.uk",
-                    "role": "Developer"
-                },
-                {
-                    "name": "Kunal Anand",
-                    "email": "kunal.r.anand@gmail.com",
-                    "homepage": "http://kunalanand.com/",
-                    "role": "Developer"
-                },
-                {
-                    "name": "Danillo César de O. Melo",
-                    "email": "danillos@gmail.com",
-                    "homepage": "http://www.danillocesar.com.br/",
-                    "role": "Contributor"
-                },
-                {
-                    "name": "Robbie Coleman",
-                    "homepage": "http://robbie.robnrob.com",
-                    "role": "Contributor"
-                },
-                {
-                    "name": "Berker Peksag",
-                    "homepage": "http://berkerpeksag.com",
-                    "role": "Developer"
-                },
-                {
-                    "name": "Jason Mooberry",
-                    "homepage": "http://jasonmooberry.com/",
-                    "role": "Developer"
-                },
-                {
-                    "name": "John Kurkowski",
-                    "role": "Contributor"
-                }
-            ],
-            "description": "Toro is a PHP router for developing RESTful web applications and APIs.",
-            "homepage": "http://github.com/anandkunal/ToroPHP",
-            "keywords": [
-                "framework",
-                "php",
-                "router"
-            ],
-            "time": "2013-09-26 13:09:42"
         }
     ],
     "packages-dev": [
@@ -184,7 +109,6 @@
     ],
     "minimum-stability": "stable",
     "stability-flags": {
-        "torophp/torophp": 20,
         "pyrocms/lex": 20
     },
     "platform": [

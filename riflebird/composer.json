@@ -1,7 +1,6 @@
 {
   "require": {
     "mustangostang/spyc": "*",
-    "torophp/torophp": "dev-master",
     "pyrocms/lex": "dev-master"
   }
 }
