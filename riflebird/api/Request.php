@@ -1,9 +1,8 @@
 <?php
 namespace Riflebird\API;
 
-class Http
+class Request
 {
-  private $headers = array();
   private static $specialHeader = array(
     'CONTENT_TYPE',
     'CONTENT_LENGTH',
@@ -81,24 +80,24 @@ class Http
   }
   
   public static function getHeader($hkey = '') {
-    if (empty($this->headers)) {
-      foreach($_SERVER as $key => $value) {
-        if (strpos($key, 'X_') === 0 || strpos($key, 'HTTP_') === 0 || in_array($key, static::$specialHeader)) {
-          $key = strtoupper($key);
-          $this->headers[$key] = $value;
-        }
+    $headers = array();
+    
+    foreach($_SERVER as $key => $value) {
+      if (strpos($key, 'X_') === 0 || strpos($key, 'HTTP_') === 0 || in_array($key, static::$specialHeader)) {
+        $key = strtoupper($key);
+        $headers[$key] = $value;
       }
     }
     
     if ( ! empty($hkey)) {
-      if ( ! empty($this->headers[$hkey])) {
-        return $this->headers[$hkey];
+      if ( ! empty($headers[$hkey])) {
+        return $headers[$hkey];
       }
       
       return null;
     }
     
-    return $this->headers;
+    return $headers;
   }
   
   public static function getMethod() {
@@ -126,9 +125,5 @@ class Http
   
   public static function isXhr() {
     return static::getHeader('X_REQUESTED_WITH') === 'XMLHttpRequest';
-  }
-  
-  public static function redirect($url, $code = 302) {
-    header("Location: ".$url, true, $code);
   }
 }
