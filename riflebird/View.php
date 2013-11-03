@@ -3,20 +3,22 @@ namespace Riflebird;
 
 class View
 {
-  private static $theme_dir;
+  private $theme_dir;
+  private $theme;
   private $data = array();
   private $parser;
   
   public function __construct() {
     $this->parser = new \Lex\Parser();
+    $this->parser->scopeGlue(':');
     
     $this->theme = API\Config::get('sites', 'theme');
-    static::$theme_dir = getcwd() . '/' . API\Config::get('sites', 'directory.theme') . '/' . $this->theme;
+    $this->theme_dir = getcwd() . '/' . API\Config::get('sites', 'directory.theme') . '/' . $this->theme;
   }
   
-  public static function getLayout($template = '') {
-    if ( ! empty($template) && file_exists(static::$theme_dir . '/layouts.yaml')) {
-      $layouts = API\Yaml::parseFile(static::$theme_dir . '/layouts.yaml');
+  public function getLayout($template = '') {
+    if ( ! empty($template) && file_exists($this->theme_dir . '/layouts.yaml')) {
+      $layouts = API\Yaml::parseFile($this->theme_dir . '/layouts.yaml');
       
       if ( ! empty($layouts[$template])) {
         return $layouts[$template];
@@ -41,8 +43,8 @@ class View
       $template .= '.html';
     }
     
-    if (file_exists(static::$theme_dir . '/templates/' . $template)) {
-      $html = $this->parser->parse(file_get_contents(static::$theme_dir . '/templates/' . $template), $viewdata, array($this, 'callback'), false);
+    if (file_exists($this->theme_dir . '/templates/' . $template)) {
+      $html = $this->parser->parse(file_get_contents($this->theme_dir . '/templates/' . $template), $viewdata, array($this, 'callback'), false);
     }
     else {
       echo "Template $template is not exists";
@@ -54,7 +56,7 @@ class View
   }
   
   public function render_error($suffix = '', $data = array(), $template = 'error') {
-    if (file_exists(static::$theme_dir . '/templates/' . $template . '_' . $suffix . '.html')) {
+    if (file_exists($this->theme_dir . '/templates/' . $template . '_' . $suffix . '.html')) {
       $template .= '_'.$suffix;
     }
     
@@ -68,20 +70,35 @@ class View
       $layout .= '.html';
     }
     
-    if ( ! file_exists(static::$theme_dir . '/layouts/' .$layout)) {
+    if ( ! file_exists($this->theme_dir . '/layouts/' .$layout)) {
       echo "Layout $layout is not exists";
       return;
     }
     
     $this->data['layout_content'] = $content;
  
-    $html = $this->parser->parse(file_get_contents(static::$theme_dir . '/layouts/' . $layout), $this->data, array($this, 'callback'), false);
+    $html = $this->parser->parse(file_get_contents($this->theme_dir . '/layouts/' . $layout), $this->data, array($this, 'callback'), false);
     $html = \Lex\Parser::injectNoParse($html);
     
     return $html;
   }
   
-  public static function callback() {
+  public function callback($name, $attributes, $content) {
+    list($class, $method) = explode(':', $name);
     
+    $pclass = '\Riflebird\Plugins\\' . $class;
+    
+    if (is_callable(array($pclass, $method))) {
+      $params = array();
+      
+      if ( ! empty($attributes)) {
+        $params[] = $attributes;
+      }
+      
+      return call_user_func_array(array($pclass, $method), $params);
+    }
+    else {
+      echo $pclass;exit;
+    }
   }
 }
