@@ -27,7 +27,7 @@ class View
   }
   
   public function setData($data) {
-    $this->data = $data;
+    $this->data = array_merge($this->data, $data);
   }
   
   public function render($template, $data = array()) {
@@ -46,9 +46,10 @@ class View
     }
     else {
       echo "Template $template is not exists";
-      return;
+      return null;
     }
     
+
     return $this->renderLayout($template, $html);
   }
   
