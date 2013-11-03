@@ -10,60 +10,19 @@ class Router
   public function __construct() {
     $this->routes = API\Config::get('routes');
     $this->path = static::getPath();
-    $this->method = strtolower(API\Http::getMethod());
+    $this->method = strtolower(API\Request::getMethod());
   }
   
   
-  public function serve($routes = array()) {
+  public function current($routes = array()) {
     $this->routes = array_merge($this->routes, $routes);
     $key = $this->getKeyRoute();
 
     if (is_null($key)) {
-      return;
+      return null;
     }
-
-    $data = $this->process($key);
-    if ( ! empty($this->routes[$key]['template'])) {
-      $view = new View();
-      echo $view->render($this->routes[$key]['template'], $data); 
-    }
-
-  }
-  
-  private function process($rkey) {
-    foreach ($this->routes[$rkey] as $key => $value) {
-      if ($key === 'function') {
-        $params = array();
-        
-        if(array_key_exists('params', $value)) {
-          $params[] = $value['params'];
-          unset($value['params']);
-        }
-        
-        if ( ! empty($this->method)) {
-          $last = count($value) - 1;
-          if (is_callable($value[$last].'_'.$this->method)) {
-            $value[$last] = $value[$last];
-          }
-        }
-        
-        if (is_callable($value)) {  
-          return call_user_func_array($value, $params);
-        }
-      }
-      
-      if ($key === 'redirect') {
-        API\Http::redirect(is_array($value) ? array_shift($value) : $value);
-      }
-      
-      if ($key === 'route') {
-        if (is_array($value)) {
-          $ckey = array_shift($value);
-        }
-        
-        $this->process($ckey);
-      }
-    }
+    
+    return $this->routes[$key];
   }
   
   private function getKeyRoute() {
