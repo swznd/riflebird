@@ -46,7 +46,7 @@ class Router
       $path = $_SERVER['ORIG_PATH_INFO'];
     }
     else {
-      if (!empty($_SERVER['REQUEST_URI']) && !empty($_SERVER['SCRIPT_NAME'])) {
+      if ( ! empty($_SERVER['REQUEST_URI']) && !empty($_SERVER['SCRIPT_NAME'])) {
         $uri = $_SERVER['REQUEST_URI'];
        
         if (strpos($uri, '?') > 0) {
