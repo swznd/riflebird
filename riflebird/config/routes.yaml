@@ -11,3 +11,8 @@
     \Riflebird\Module\Blog\Blog
     category
   template: category.html
+
+"/home":
+  redirect: 
+    url: "/"
+    type: permanent
