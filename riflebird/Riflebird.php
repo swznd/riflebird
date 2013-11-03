@@ -115,12 +115,12 @@ class Riflebird
     $route = $router->current();
     
     $output = new Output;
+    $view = new View();
     
     if (is_array($route)) {
       $data = $this->process($route);
       
       if ( ! empty($route['template'])) {
-        $view = new View();
         $view->setData($sites);
         $body = $view->render($route['template'], $data);
         
@@ -130,6 +130,19 @@ class Riflebird
       else if ( ! empty($route['redirect'])) {
         $output->redirect($data['url'], $data['status']);
       }
+      
+      else {
+        $output->setStatus(500);
+        $body = $view->render_error(404);
+      
+        $output->setBody($body);
+      }
+    }
+    else {
+      $output->setStatus(404);
+      $body = $view->render_error(404, array('title' => 'Not Found', 'description' => 'URL that you access does not exists'));
+      
+      $output->setBody($body);
     }
     
     $output->send();
