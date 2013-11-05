@@ -13,7 +13,7 @@ class View
     $this->parser->scopeGlue(':');
     
     $this->theme = API\Config::get('sites', 'theme');
-    $this->theme_dir = getcwd() . '/' . API\Config::get('sites', 'directory.theme') . '/' . $this->theme;
+    $this->theme_dir = API\Filesystem::parentPath(API\Config::get('sites', 'directory.theme') . '/' . $this->theme);
   }
   
   public function getLayout($template = '') {
