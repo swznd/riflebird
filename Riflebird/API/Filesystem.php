@@ -24,6 +24,10 @@ class Filesystem
     return getcwd() . '/' . $path;
   }
   
+  public static function systemPath($path = '') {
+    return static::parentPath('Riflebird/'. $path);
+  }
+  
   public static function readDir($dir, $filter = array()) {
     if ( ! is_dir($dir)) {
       return null;
@@ -36,11 +40,19 @@ class Filesystem
         continue;
       }
       
-      if( ! empty($filter) && ! preg_match('/'.$filter.'/', $file->getBasename())) {
+      if( ! empty($filter['name']) && ! preg_match('/'.$filter['name'].'/', $file->getBasename())) {
         continue;
       }
       
-      $files[] = str_replace($dir . '/', '', $file->getPathname());
+      if ( ! empty($filter['before']) && $file->getMTime() > $filter['before']) {
+        continue;
+      }
+      
+      if ( ! empty($filter['after']) && $file->getMTime() < $filter['after']) {
+        continue;
+      }
+      
+      $files[] = $file->getPathname();
     }
     
     return $files;
