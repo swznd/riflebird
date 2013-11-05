@@ -7,6 +7,7 @@ class Riflebird
 {
   protected $vars = array();
   protected static $instance;
+  protected $method;
 
 
   public static function autoload($className) {
@@ -51,6 +52,8 @@ class Riflebird
     if ( ! static::$instance instanceof $this) {
       static::$instance = $this;
     }
+    
+    $this->method = strtolower(API\Request::getMethod());
   }
   
   public static function getInstance() {
@@ -83,7 +86,11 @@ class Riflebird
         }
         
         if (is_callable($value)) {  
-          return call_user_func_array($value, $params);
+          $cname = ucfirst($value[0]);
+          $class = new $cname();
+          $method = $value[1];
+          
+          return call_user_func_array(array($class, $method), $params);
         }
       }
       

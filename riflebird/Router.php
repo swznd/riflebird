@@ -4,13 +4,11 @@ namespace Riflebird;
 class Router
 {
   private $routes;
-  private $method;
   private $path;
   
   public function __construct() {
     $this->routes = API\Config::get('routes');
     $this->path = static::getPath();
-    $this->method = strtolower(API\Request::getMethod());
   }
   
   
