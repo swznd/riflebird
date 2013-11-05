@@ -6,16 +6,14 @@ class Config
   
   public static function get($file, $key = '') {
     
-    $riflebird = \Riflebird\Riflebird::getInstance();
-    
-    if ( ! \Riflebird\API\Filesystem::isYaml($file)) {
+    if ( ! Filesystem::isYaml($file)) {
       $file .= '.yaml';
     }
     
-    if ( ! \Riflebird\API\Filesystem::isHasDir($file)) {
-      $file = $riflebird->getVars('config.path') . '/' . $file;
+    if ( ! Filesystem::isHasDir($file)) {
+      $file = Filesystem::systemPath('Config/'.$file);
     }
-    
+
     $sites = Yaml::parse($file);
     
     if ( ! empty($key)) {
