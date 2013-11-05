@@ -1,6 +1,7 @@
 {
   "require": {
     "mustangostang/spyc": "*",
-    "pyrocms/lex": "dev-master"
+    "pyrocms/lex": "dev-master",
+    "dflydev/markdown": "1.0.*@dev"
   }
 }

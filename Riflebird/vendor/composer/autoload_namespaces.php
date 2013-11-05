@@ -6,5 +6,6 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'dflydev\\markdown' => array($vendorDir . '/dflydev/markdown/src'),
     'Lex' => array($vendorDir . '/pyrocms/lex/lib'),
 );
