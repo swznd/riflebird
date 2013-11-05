@@ -5,5 +5,5 @@ theme: sederhana
 timezone: Asia/Jakarta
 
 directory:
-  content: content
+  content: contents
   theme: themes
